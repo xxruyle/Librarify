@@ -1,0 +1,369 @@
+
+* { 
+    margin: 0; 
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+li {
+    list-style-type: none;
+}
+
+hr {
+    width: 80%;
+}
+
+#root, body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer{
+    margin-top: auto;
+}
+
+.loading-splash {
+    font-size: 5em;
+    margin: 0 auto; 
+}
+
+
+.nav {
+    display: flex; 
+
+    justify-content: space-between;
+    align-items: center;
+    height: 5em; 
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px -2px rgba(0,0,0,.2);
+    width: 100%; 
+    margin-bottom: 2em;
+}
+
+.navTitle {
+    font-size: 2em;
+    margin-left: 1em;
+}
+
+.navBarList {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+
+.navItem > a,
+.navItem-selected > a {
+    position: relative;
+    color: black;
+    margin: 0 1em 0 5em;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    width: 5em;
+    text-decoration: none; /* Remove default underline */
+    font-size: 1.2em;
+}
+
+.navItem-selected > a {
+    color: purple;
+}
+
+.navItem > a::after,
+.navItem-selected > a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: currentColor;
+    bottom: -2px;
+    left: 50%;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+.navItem:hover > a::after,
+.navItem-selected:hover > a::after {
+    width: 80%;
+    left: 10%;
+}
+
+.dashBoard {
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-evenly; 
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.searchSpace {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly; 
+}
+
+.card {
+    width: 240px; /* Reduced the width to make the card smaller */
+    height: 384px; 
+    background-color: #1e1e1e; /* Dark card background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+    overflow: hidden;
+    margin: 20px; 
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    cursor: pointer; 
+}
+
+
+.book-cover {
+    width: 100%;
+    height: 150px; /* Reduced the height of the image */
+    object-fit: cover; /* Ensures the image covers the entire area */
+    display: block;
+}
+
+.book-page-container {
+    margin-left: 2em;
+    margin-top: 6em;
+    margin-bottom: 2em;
+    height: 100%; 
+    width: 100%; 
+    display: flex; 
+    justify-content: space-around;
+    align-items: top;
+    flex-wrap: wrap;
+}
+
+.book-page-cover-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-page-cover {
+    border: 1px solid rgb(154, 147, 147); 
+    border-radius: 1%;
+    width: 26.6em; 
+    height: 44.6em;
+    margin-bottom: 3em;
+
+    object-fit: cover; 
+    display: block;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.book-page-cover:hover {
+    border: 2px solid black; 
+
+}
+
+.book-page-price {
+    margin-bottom: 2em;
+    font-size: 1.5em;
+
+}
+
+.book-page-addtocart {
+    width: 25em; 
+    height: 4em;
+
+    border-radius: 10%;
+
+    background-color: white;
+    border: 1.0px solid #1e1e1e;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    font-size: 1em;
+
+    cursor: pointer; 
+}
+
+.book-page-addtocart:hover {
+    background-color: rgba(139, 126, 126, 0.355);
+
+}
+
+.book-page-info-container {
+    margin-left: 5em;
+    margin-right: 5em;
+    display: flex;
+    flex: 1 1 100px; /* or 1 0 100px, and no more need in min-width at all */
+
+    flex-direction: column;
+    max-width: 100em;
+    min-width: 40em;
+}
+
+.book-page-title {
+    font-size: 5em;
+    text-wrap: wrap;
+    min-width: 5em;
+    margin-bottom: 0.3em;
+}
+
+.book-page-author {
+    margin-left: 1.0em; 
+    margin-bottom: 0.5em;
+}
+
+.book-page-description {
+    margin-top: 3em;
+    text-wrap: balance;
+    font-size: 1.5em;
+    max-width: 50em;
+    min-width: 2em;
+
+}
+
+.book-page-moreinfo-container {
+    margin-top: 4em;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-around;
+    height: 6em;
+}
+
+.cart-container {
+    margin-top: 4em;
+    margin-bottom: 4em;
+    display: flex; 
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+
+}
+
+
+.cartedbook-container {
+    margin-bottom: 2em;
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+    width: 100%; 
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.cartedbook-cover {
+    border: 1px solid rgb(154, 147, 147); 
+    border-radius: 1%;
+    width: 10em; 
+    height: 16em;
+    object-fit: cover; 
+    display: block;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.cartedbook-info-container {
+    width: 100%; 
+    display: flex; 
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.cartedbook-title, .cartedbook-price, .cartedbook-remove {
+    font-size: 20px;
+}
+
+
+
+
+.book-info {
+    padding: 15px;
+}
+
+.book-title {
+    font-size: 1.0em;
+    margin: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.book-author {
+    font-size: 1em;
+    color: #b0b0b0;
+    margin: 0 0 10px 0;
+}
+
+
+
+.book-description, .book-price{
+    font-size: 0.9em;
+    color:  #b0b0b0;
+    line-height: 1.4;
+}
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3em;
+    flex-direction: row;
+    background-color: #ffffff; /* White container background */
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 5px 10px;
+    width: 20%;
+}
+
+.search-input {
+    flex-grow: 1;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    color: #333; /* Dark text */
+    font-size: 16px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #888888; /* Medium gray placeholder text */
+}
+
+.search-button, .cartedbook-remove {
+    background: #3b3b42;
+    border-radius: 999px;
+    box-shadow: #3b3b42 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+}
+
+
+.footer {
+
+    width: 100%; 
+
+    height: 3em; 
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2 0px 0px 0px rgba(0,0,0,0.8);
+
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    
+}
+

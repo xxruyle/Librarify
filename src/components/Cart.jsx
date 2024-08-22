@@ -1,9 +1,12 @@
+import { CartContext } from "./Context.jsx";
 import Template from "./Template";
-import { useState } from "react";
+import { useContext } from "react";
 
 
-function CartedBook({book, handleRemove}) 
+function CartedBook({book}) 
 {
+    const {handleRemoveFromCart} = useContext(CartContext)
+
     return (
         <div className="cartedbook-container" key={book.id}>
             <img className="cartedbook-cover" src={book.coverImage} alt={book.title}/>
@@ -11,22 +14,33 @@ function CartedBook({book, handleRemove})
             <div className="cartedbook-info-container">
                 <div className="cartedbook-title">{book.title}</div>
                 <div className="cartedbook-price">{book.price}</div>
-                <button onClick={() => handleRemove(book.id)} className="cartedbook-remove">Remove</button>
+                <div className="cartedbook-price">Quantity: {book.amount}</div>
+                <button onClick={() => handleRemoveFromCart(book.id)} className="cartedbook-remove">Remove</button>
             </div>
+
         </div>
     );
 }
 
-function Cart({books, handleRemove}) 
+function Cart() 
 {
+    const { cart } = useContext(CartContext);
+
+    const numBooksMessage = (cart.length > 0) ?  `` : 
+    `Your cart is empty`;
+
+
     return (
         <Template>
-            <h1>Your Cart</h1>
+            <h1>{numBooksMessage}</h1>
             <ul className="cart-container">
-                {books.map((book) => {
-                    return <CartedBook key={book.id} book={book} handleRemove={handleRemove}/>
+                {cart.map((book) => {
+                    return <CartedBook key={book.id} book={book}/>
                 })}
             </ul>
+            {(cart.length > 0) ? (
+                <button className="cartedbook-checkout">Checkout</button>
+            ) : <></>}
         </Template>
     );
 }

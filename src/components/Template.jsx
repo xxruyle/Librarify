@@ -2,6 +2,8 @@ import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+
+
 function Template({children}) 
 {
     return (
@@ -15,5 +17,4 @@ function Template({children})
     );
 
 }
-
 export default Template; 

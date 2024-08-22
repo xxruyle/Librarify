@@ -1,13 +1,17 @@
-import { useEffect, useState, CSSProperties} from "react";
+import { useEffect, useState, useContext, CSSProperties} from "react";
+import { CartContext } from "./Context.jsx";
 import { RiseLoader } from "react-spinners";
 import override from "./spinner-override.jsx"
 
 
 
 
-function BookPage({getBook, handleAddToCart}) 
+function BookPage({getBook}) 
 {
     const [book, setBook] = useState();
+    const [amount, setAmount] = useState(1); 
+
+    const {handleAddToCart} = useContext(CartContext);
 
     useEffect(() => {
         const waitForBook = async () => {
@@ -24,7 +28,11 @@ function BookPage({getBook, handleAddToCart})
                     <div className="book-page-cover-container">
                         <img  className="book-page-cover" src={book.coverImage} alt={book.title}/>
                         <div className="book-page-price">{book.price}</div>
-                        <button onClick={() => handleAddToCart(book)} className="book-page-addtocart">Add To Cart</button>
+                        
+                        <div className="book-page-cartquantity">
+                            <button onClick={() => {handleAddToCart(book, amount);}} className="book-page-addtocart">Add To Cart</button>
+                            <input type="number" placeholder="1" text={1} onChange={(event) => setAmount(event.target.value)} className="book-page-quantity"/>
+                        </div>
                     </div>
 
                     <div className="book-page-info-container">
@@ -57,9 +65,6 @@ function BookPage({getBook, handleAddToCart})
 
         );
     }
-
-
-
 }
 
 export default BookPage;

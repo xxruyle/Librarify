@@ -12,7 +12,7 @@ const defaultPreviewImg =
 
 const searchBooks = (searchValue) => {
     const value = `https://www.googleapis.com/books/v1/volumes?q=${searchValue}&printType=books&orderBy=relevance&maxResults=40`
-    const result = fetch(value)
+    const result = fetch(value).catch(error => console.log(error))
                          .then( (response) =>  response.json())
                          .then( (data) => {
                             return  data.items; 
@@ -80,17 +80,23 @@ function SearchBar({updateData})
 {
     const [inputValue, setInputValue] = useState(""); 
 
+    const handleKeyPress = (event) => {
+        if (event.key == "Enter") {
+            updateData(event.target.value);
+        }
+    }
+
     return (
         <div className="search-container">
-                <input type="text" placeholder="Search for books..." className="search-input" onChange={(event) => {setInputValue(event.target.value)}}/>
-                <button className="search-button" onClick={() => {updateData(inputValue)}}>Search</button>
+                <input type="text" placeholder="Search for books..." className="search-input" onKeyDown={(event) => handleKeyPress(event)} onChange={(event) => {setInputValue(event.target.value)}}/>
+                <button className="search-button"  onClick={() => {updateData(inputValue)}}>Search</button>
         </div>
     );
 
 }
 
 
-function Browse({handleAddToCart}) 
+function Browse() 
 {
     const [searchedBookData, setSearchedBookData] = useState([]);
     const [didSearch, setDidSearch] = useState(false);
@@ -175,6 +181,7 @@ function Browse({handleAddToCart})
             "description": description,
             "price": price,
             "coverImage": cover,
+            "amount": 1 // default 
         }
 
         return bookInfo;
@@ -205,7 +212,7 @@ function Browse({handleAddToCart})
                     </>
                 ) : 
                     <>
-                        <BookPage getBook={() => asyncGetBookDataByID(params["*"])} handleAddToCart={handleAddToCart}/>
+                        <BookPage getBook={() => asyncGetBookDataByID(params["*"])}/>
                     </>
                 }
             </Template>

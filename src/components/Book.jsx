@@ -19,8 +19,6 @@ function Book({id, title, author, price, img=defaultPreviewImg}) {
                 </div>
             </Card>
         </Link>
-
-
     );
 }
 
